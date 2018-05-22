@@ -47,6 +47,10 @@
                           selector:@selector(moviePlayBackStateDidChange:)
                               name:IJKMPMoviePlayerPlaybackStateDidChangeNotification
                             object:_player];
+        [defaultCenter addObserver:self
+                          selector:@selector(movieSeekDidComplete:)
+                              name:IJKMPMoviePlayerDidSeekCompleteNotification
+                            object:_player];
     }
 
     return self;
@@ -260,6 +264,12 @@
             break;
         }
     }
+}
+
+- (void)movieSeekDidComplete:(NSNotification*)notification
+{
+    if(![_player isPlaying])
+        [_player play];
 }
 
 #pragma mark - Lifecycle

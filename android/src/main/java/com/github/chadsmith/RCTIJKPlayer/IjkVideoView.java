@@ -475,6 +475,8 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
         @Override
         public void onSeekComplete(IMediaPlayer mp) {
             mSeekEndTime = System.currentTimeMillis();
+            if(!mMediaPlayer.isPlaying())
+                start();
         }
     };
 
