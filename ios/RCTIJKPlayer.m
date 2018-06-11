@@ -32,6 +32,14 @@
         NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
 
         [defaultCenter addObserver:self
+                          selector:@selector(applicationWillResignActive:)
+                              name:UIApplicationWillResignActiveNotification
+                            object:nil];
+        [defaultCenter addObserver:self
+                          selector:@selector(applicationWillEnterForeground:)
+                              name:UIApplicationWillEnterForegroundNotification
+                            object:nil];
+        [defaultCenter addObserver:self
                           selector:@selector(loadStateDidChange:)
                               name:IJKMPMoviePlayerLoadStateDidChangeNotification
                             object:_player];
@@ -54,6 +62,19 @@
     }
 
     return self;
+}
+
+- (void)applicationWillResignActive:(NSNotification *)notification
+{
+    if (_paused)
+        return;
+    if(_player && _player.isPlaying)
+        [_player pause];
+}
+
+- (void)applicationWillEnterForeground:(NSNotification *)notification
+{
+    [self applyModifiers];
 }
 
 - (void)applyModifiers
