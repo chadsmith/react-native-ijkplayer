@@ -142,15 +142,21 @@ public class RCTIJKPlayer extends FrameLayout implements LifecycleEventListener,
         if(readableMap != null) {
             Map<String, String> headerMap = new HashMap<>();
             ReadableMapKeySetIterator iterator = readableMap.keySetIterator();
+            StringBuilder headers = new StringBuilder();
             while (iterator.hasNextKey()) {
                 String key = iterator.nextKey();
                 ReadableType type = readableMap.getType(key);
                 switch (type) {
                     case String:
-                        headerMap.put(key, readableMap.getString(key));
+                        headers
+                            .append(key)
+                            .append(": ")
+                            .append(readableMap.getString(key))
+                            .append("\r\n");
                         break;
                 }
             }
+            headerMap.put("Headers", headers.toString());
             ijkVideoView.setVideoPath(uriString, headerMap);
         }
         else
