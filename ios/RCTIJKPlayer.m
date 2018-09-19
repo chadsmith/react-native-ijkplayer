@@ -122,7 +122,7 @@
     if(headers) {
         NSMutableArray *headerArray = [[NSMutableArray alloc] init];
         for(id key in headers)
-            [headerArray addObject:[NSString stringWithFormat:@"%@=%@", key, [headers objectForKey:key] ]];
+            [headerArray addObject:[NSString stringWithFormat:@"%@: %@", key, [headers objectForKey:key] ]];
         [ijkOptions setFormatOptionValue:[headerArray componentsJoinedByString:@"\r\n"] forKey:@"headers"];
     }
     if(userAgent)
