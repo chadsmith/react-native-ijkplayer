@@ -27,6 +27,7 @@ allprojects {
 
 dependencies {
   compile 'com.facebook.react:react-native:+'
+  compile 'com.parse.bolts:bolts-tasks:1.4.0'
   compile(name:'ijkplayer-java-release', ext:'aar')
   compile(name:'ijkplayer-armv7a-release', ext:'aar')
   compile(name:'ijkplayer-arm64-release', ext:'aar')
